@@ -24,7 +24,9 @@ python align_images.py raw_images/ aligned_images/
 echo "**Train neural network**"
 rm -rf generated_images/
 mkdir generated_images/
-python project_images.py aligned_images/ generated_images/ --vgg16-pkl 'networks/vgg16_zhang_perceptual.pkl' --num-steps 1200 --initial-learning-rate 0.02 --network-pkl networks/other/generator_yellow-stylegan2-config-f.pkl --video=False
+steps=500
+rate=0.1
+python project_images.py aligned_images/ generated_images/ --vgg16-pkl 'networks/vgg16_zhang_perceptual.pkl' --num-steps $steps --initial-learning-rate $rate --network-pkl networks/other/generator_yellow-stylegan2-config-f.pkl --video=False
 
 echo "**Animating face modification**"
 rm -rf results/
