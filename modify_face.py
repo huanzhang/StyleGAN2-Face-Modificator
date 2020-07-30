@@ -26,7 +26,7 @@ network = 'asian'
 network_path = 'networks/other/' + networks_urls[network][1]
 network_pkl = 'networks/other/' + networks_urls[network][1]
 
-resolution = "256"  # @param [128, 256, 512, 1024]
+resolution = "512"  # @param [128, 256, 512, 1024]
 size = int(resolution), int(resolution)
 
 
