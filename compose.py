@@ -162,6 +162,20 @@ def convert_params(x):
     return round(resize), round(detaX), round(detaY)
 
 
+def pic2video(pic_path, dst_path, size):
+    filelist = os.listdir(pic_path)
+    filelist.sort()
+    fps = 30
+    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+    video = cv2.VideoWriter(dst_path, fourcc, fps, size)
+    for item in filelist:
+        if item.endswith('.jpg'):
+            item = pic_path + '/' + item
+            img = cv2.imread(item)
+            video.write(img)
+    video.release()
+
+
 def main():
     params = list(map(convert_params, source_config))
     back_images = os.listdir("data/images")
@@ -176,6 +190,7 @@ def main():
         resized_im2 = im2.resize((p[0], p[0]), Image.ANTIALIAS)
         back_im.paste(resized_im2, (p[1], p[2]), resized_im2)
         back_im.save("results/dst/"+back_images[i])
+    pic2video('results/dst/', 'results/out.mp4', (324, 576))
 
 
 if __name__ == "__main__":
