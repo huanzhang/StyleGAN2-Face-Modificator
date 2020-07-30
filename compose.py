@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+import cv2
 
 source_config = [
     (140.0, 239.0, 84.0),
