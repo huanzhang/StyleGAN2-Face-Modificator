@@ -67,5 +67,19 @@ source .venv/bin/activate
 
 rm -rf image/
 mkdir image/
-cp ~/StyleGAN2-Face-Modificator/results/3param/*.png image/
+cp ../StyleGAN2-Face-Modificator/results/3param/*.png image/
 python wipe_background.py
+
+
+echo "**Composing source and photo**"
+cd ../StyleGAN2-Face-Modificator
+if command -v deactivate &> /dev/null;then
+    deactivate
+fi
+source .venv/bin/activate
+rm -rf results/3param/
+mkdir results/3param/
+rm -rf results/dst/
+mkdir results/dst/
+cp ../face-parsing.PyTorch/res/out/*.png results/3param/
+python compose.py

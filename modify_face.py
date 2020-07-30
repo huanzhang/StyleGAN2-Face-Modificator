@@ -100,14 +100,14 @@ def main(npy_file):
         move_latent_and_save_3_param(
             v, direction_intensity, i, Gs_network, Gs_syn_kwargs)
 
-    face_img = []
-    img = os.listdir("results/3param")
-    img.sort()
-    print('Animation is created. Please wait.')
-    for i in img:
-        face_img.append(imageio.imread("results/3param/"+i))
-    face_img = np.array(face_img)
-    imageio.mimsave("results/3param/3param.mp4", face_img)
+    # face_img = []
+    # img = os.listdir("results/3param")
+    # img.sort()
+    # print('Animation is created. Please wait.')
+    # for i in img:
+    #     face_img.append(imageio.imread("results/3param/"+i))
+    # face_img = np.array(face_img)
+    # imageio.mimsave("results/3param/3param.mp4", face_img)
 
 
 if __name__ == "__main__":
