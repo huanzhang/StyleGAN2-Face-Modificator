@@ -10,6 +10,9 @@ else
     exit 1
 fi
 
+GPU1=3
+GPU2=4
+
 
 if command -v deactivate &> /dev/null;then
     deactivate
@@ -19,7 +22,7 @@ source .venv/bin/activate
 echo "**Crop photo**"
 rm -rf aligned_images/
 mkdir aligned_images/
-python align_images.py raw_images/ aligned_images/
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python align_images.py raw_images/ aligned_images/
 
 echo "**Wipe background the first time**"
 rm -rf ../face-parsing.PyTorch/image/
@@ -32,7 +35,7 @@ fi
 source .venv/bin/activate
 rm -rf res/out/
 mkdir res/out/
-python wipe_background.py
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python wipe_background.py
 rm -rf ../StyleGAN2-Face-Modificator/aligned_images/ 
 mkdir ../StyleGAN2-Face-Modificator/aligned_images/
 cp res/out/*.jpg ../StyleGAN2-Face-Modificator/aligned_images/
@@ -47,7 +50,7 @@ rm -rf generated_images/
 mkdir generated_images/
 steps=500
 rate=0.1
-python project_images.py aligned_images/ generated_images/ --vgg16-pkl 'networks/vgg16_zhang_perceptual.pkl' --num-steps $steps --initial-learning-rate $rate --network-pkl networks/other/generator_yellow-stylegan2-config-f.pkl --video=False
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python project_images.py aligned_images/ generated_images/ --vgg16-pkl 'networks/vgg16_zhang_perceptual.pkl' --num-steps $steps --initial-learning-rate $rate --network-pkl networks/other/generator_yellow-stylegan2-config-f.pkl --video=False
 
 echo "**Animating face modification**"
 rm -rf results/
@@ -55,7 +58,7 @@ mkdir results/
 file_name="${input##*/}"
 file="${file_name%.*}"
 npy_file="${file}_01.npy"
-python modify_face.py "generated_images/$npy_file"
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python modify_face.py "generated_images/$npy_file"
 
 
 echo "**Wipe background the second time**"
@@ -68,7 +71,7 @@ source .venv/bin/activate
 rm -rf image/
 mkdir image/
 cp ../StyleGAN2-Face-Modificator/results/3param/*.png image/
-python wipe_background.py
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python wipe_background.py
 
 
 echo "**Composing source and photo**"
@@ -82,4 +85,4 @@ mkdir results/3param/
 rm -rf results/dst/
 mkdir results/dst/
 cp ../face-parsing.PyTorch/res/out/*.png results/3param/
-python compose.py
+CUDA_VISIBLE_DEVICES=$GPU1,$GPU2 python compose.py
