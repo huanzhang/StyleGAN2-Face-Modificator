@@ -70,11 +70,11 @@ def main(npy_file):
     coeffs1 = []
     for i in range(0, frames):
         coeffs1.append(round((i*intensity1)/frames, 3))
-        coeffs1 = coeffs1 + list(reversed(coeffs1)) + \
-            coeffs1 + list(reversed(coeffs1)) + coeffs1 + \
-            list(reversed(coeffs1)) + \
-            coeffs1 + list(reversed(coeffs1)) + coeffs1 + \
-            list(reversed(coeffs1))
+    coeffs1 = coeffs1 + list(reversed(coeffs1)) + \
+        coeffs1 + list(reversed(coeffs1)) + coeffs1 + \
+        list(reversed(coeffs1)) + \
+        coeffs1 + list(reversed(coeffs1)) + coeffs1 + \
+        list(reversed(coeffs1))
 
     parameter2 = 'emotion_happy'
     direction_file2 = np.load('latent_directions/' + parameter2 + '.npy')
@@ -82,11 +82,11 @@ def main(npy_file):
     coeffs2 = []
     for i in range(0, frames):
         coeffs2.append(round((i*intensity2)/frames, 3))
-        coeffs2 = coeffs2 + list(reversed(coeffs2)) + \
-            coeffs2 + list(reversed(coeffs2)) + coeffs2 + \
-            list(reversed(coeffs2)) + \
-            coeffs2 + list(reversed(coeffs2)) + coeffs2 + \
-            list(reversed(coeffs2))
+    coeffs2 = coeffs2 + list(reversed(coeffs2)) + \
+        coeffs2 + list(reversed(coeffs2)) + coeffs2 + \
+        list(reversed(coeffs2)) + \
+        coeffs2 + list(reversed(coeffs2)) + coeffs2 + \
+        list(reversed(coeffs2))
 
     parameter3 = 'smile'
     direction_file3 = np.load('latent_directions/' + parameter3 + '.npy')
@@ -94,11 +94,11 @@ def main(npy_file):
     coeffs3 = []
     for i in range(0, frames):
         coeffs3.append(round((i*intensity3)/frames, 3))
-        coeffs3 = coeffs3 + list(reversed(coeffs3)) + \
-            coeffs3 + list(reversed(coeffs3)) + coeffs3 + \
-            list(reversed(coeffs3)) + \
-            coeffs3 + list(reversed(coeffs3)) + coeffs3 + \
-            list(reversed(coeffs3))
+    coeffs3 = coeffs3 + list(reversed(coeffs3)) + \
+        coeffs3 + list(reversed(coeffs3)) + coeffs3 + \
+        list(reversed(coeffs3)) + \
+        coeffs3 + list(reversed(coeffs3)) + coeffs3 + \
+        list(reversed(coeffs3))
 
     for i in range(frames*5):
         direction_intensity1 = direction_file1 * coeffs1[i]
